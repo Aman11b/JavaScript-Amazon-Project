@@ -37,6 +37,9 @@
 //   },
 // ];
 
+// const cart = [];
+
+import { cart } from "../data/cart.js";
 let productHTML = "";
 
 products.forEach((product) => {
@@ -126,7 +129,7 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
 
     // console.log(cart);
     // console.log(cartQuantity);
-    
+
     document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
   });
 });
