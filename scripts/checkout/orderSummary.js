@@ -6,6 +6,7 @@ import {
   deliveryOptions,
   getDeliveryOption,
 } from "../../data/deliveryOptions.js";
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 const today = dayjs();
 
@@ -111,6 +112,7 @@ export function renderOrderSummary() {
       const productId = link.dataset.productId;
       // console.log(productId);
       removeFromCart(productId);
+
       // console.log(cart);
 
       const container = document.querySelector(
@@ -120,6 +122,8 @@ export function renderOrderSummary() {
       // console.log(container);
 
       container.remove();
+
+      renderPaymentSummary();
     });
   });
 
@@ -128,6 +132,7 @@ export function renderOrderSummary() {
       const { productId, deliveryOptionId } = element.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
+      renderPaymentSummary();
     });
   });
 }
