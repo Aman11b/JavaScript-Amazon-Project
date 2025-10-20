@@ -77,3 +77,5 @@ businessCart.loadFromStorage();
 
 console.log(cart);
 console.log(businessCart);
+
+// class is object generator
