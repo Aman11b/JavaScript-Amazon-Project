@@ -1,20 +1,21 @@
 class Cart {
   cartItems = undefined;
   // can ignore undefine
-  localStorageKey;
+  #localStorageKey;
+  // # is for private property
 
   // run automatically one object is called
   constructor(localStorageKey) {
-    this.localStorageKey = localStorageKey;
-    // businessCart.localStorageKey = "car-business";
+    this.#localStorageKey = localStorageKey;
+    // businessCart.#localStorageKey = "car-business";
 
-    this.loadFromStorage();
+    this.#loadFromStorage();
     // businessCart.loadFromStorage();
   }
   // nothing in return name must be constructor
 
-  loadFromStorage = function () {
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+  #loadFromStorage() {
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
     if (!this.cartItems) {
       this.cartItems = [
         {
@@ -29,10 +30,10 @@ class Cart {
         },
       ];
     }
-  };
+  }
 
   saveToStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 
   addToCart(productId) {
@@ -84,6 +85,9 @@ class Cart {
 
 const cart = new Cart("car-opp");
 const businessCart = new Cart("car-business");
+
+// cart.#localStorageKey = "test";
+// filed is same as property
 
 console.log(cart);
 console.log(businessCart);
