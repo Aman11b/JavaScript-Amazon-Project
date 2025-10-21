@@ -26,15 +26,29 @@ import { loadCart } from "../data/cart.js";
 
 //   });
 //    to replace .then -> await
+
+// no need to use try catch with async await its used with synchronous code
+// when error occur the next line of code is skipped
+// error handling uis build to tp cath error outside our control
+// we can manually create error throw
+// in promise 2 ways to create error throw
 async function loadPage() {
   //   console.log("load page");
-
-  await loadProductsFetch();
-  await new Promise((resolve) => {
-    loadCart(() => {
-      resolve("value from cart");
+  try {
+    // throw "error 1";
+    await loadProductsFetch();
+    // reject let us create an error in the future
+    await new Promise((resolve, reject) => {
+      // throw "error";
+      loadCart(() => {
+        // cant add throw as it wont work in future
+        // reject("error ");
+        resolve("value from cart");
+      });
     });
-  });
+  } catch (error) {
+    console.log("unexpected behavior");
+  }
 
   renderOrderSummary();
   renderPaymentSummary();

@@ -617,9 +617,13 @@ export function loadProductsFetch() {
       });
 
       console.log("load products");
+    })
+    .catch(() => {
+      console.log("unexpected error");
     });
   return promise;
 }
+// loadProductsFetch();
 // loadProductsFetch().then(() => {
 //   console.log("next step");
 
@@ -643,6 +647,11 @@ export function loadProducts(renderFunction) {
     console.log("load products");
   });
 
+  xhr.addEventListener("error", () => {
+    console.log("unexpected error");
+  });
+
+  // xhr.open("GET", "https://error.supersimplebackend.dev/products");
   xhr.open("GET", "https://supersimplebackend.dev/products");
   xhr.send();
   // just send not wait to comeback have to make it synch
