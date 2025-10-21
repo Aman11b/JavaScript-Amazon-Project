@@ -97,22 +97,22 @@ class Clothing extends Product {
 //   // undefine as object is yet to be created
 // };
 
-function logThis() {
-  console.log(this);
-}
-logThis();
-// still its not pointing anywhere so undefined
-logThis.call("hello");
+// function logThis() {
+//   console.log(this);
+// }
+// logThis();
+// // still its not pointing anywhere so undefined
+// logThis.call("hello");
 // now we can change this to what ever in function using .call
 
-const obj3 = {
-  method: () => {
-    console.log(this);
-  },
+// const obj3 = {
+//   method: () => {
+//     console.log(this);
+//   },
 
-  // this keep the values outside the arrow function
-};
-obj3.method();
+//   // this keep the values outside the arrow function
+// };
+// obj3.method();
 // hence undefine as outside arrow function this is undefined
 
 export const products = [
