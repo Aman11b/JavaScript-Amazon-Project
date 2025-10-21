@@ -79,6 +79,42 @@ class Clothing extends Product {
 // });
 // console.log(product1);
 
+// const date = new Date();
+// console.log(date);
+// console.log(date.toLocaleTimeString());
+// console.log(date.toDateString());
+
+// dayjs uses dat class but provides extra features
+
+// this > points to its own
+
+// console.log(this);
+// undefine coz no object pointing to this that is true in module only
+
+// const obj2 = {
+//   a: 2,
+//   b: this.a,
+//   // undefine as object is yet to be created
+// };
+
+function logThis() {
+  console.log(this);
+}
+logThis();
+// still its not pointing anywhere so undefined
+logThis.call("hello");
+// now we can change this to what ever in function using .call
+
+const obj3 = {
+  method: () => {
+    console.log(this);
+  },
+
+  // this keep the values outside the arrow function
+};
+obj3.method();
+// hence undefine as outside arrow function this is undefined
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
