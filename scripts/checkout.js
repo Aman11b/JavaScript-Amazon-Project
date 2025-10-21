@@ -1,6 +1,6 @@
 import { renderOrderSummary } from "./checkout/orderSummary.js";
 import { renderPaymentSummary } from "./checkout/paymentSummary.js";
-import { loadProducts } from "../data/products.js";
+import { loadProducts, loadProductsFetch } from "../data/products.js";
 
 import { loadCart } from "../data/cart.js";
 
@@ -15,13 +15,14 @@ import { loadCart } from "../data/cart.js";
 // Promise.all runs multiple promises and wait for all of them to finish
 
 Promise.all([
-  new Promise((resolve) => {
-    //   console.log('promise')
-    loadProducts(() => {
-      // console.log("finish loading")
-      resolve("value from product");
-    });
-  }),
+  //   new Promise((resolve) => {
+  //     //   console.log('promise')
+  //     loadProducts(() => {
+  //       // console.log("finish loading")
+  //       resolve("value from product");
+  //     });
+  //   }),
+  loadProductsFetch(),
   new Promise((resolve) => {
     loadCart(() => {
       resolve("value from cart");
