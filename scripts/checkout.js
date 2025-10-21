@@ -2,12 +2,71 @@ import { renderOrderSummary } from "./checkout/orderSummary.js";
 import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 import { loadProducts } from "../data/products.js";
 
+import { loadCart } from "../data/cart.js";
+
 // import "../data/cart-oop.js";
 // import "../data/cart-class.js";
 
 // import "../data/backend-practice.js";
 
-loadProducts(() => {
+// promise is a class -> runs inner function immediately
+// resolve lets us control when to go next function
+// promise created separate thread of code
+// Promise.all runs multiple promises and wait for all of them to finish
+
+Promise.all([
+  new Promise((resolve) => {
+    //   console.log('promise')
+    loadProducts(() => {
+      // console.log("finish loading")
+      resolve("value from product");
+    });
+  }),
+  new Promise((resolve) => {
+    loadCart(() => {
+      resolve("value from cart");
+    });
+  }),
+]).then((values) => {
+  console.log(values);
   renderOrderSummary();
   renderPaymentSummary();
 });
+
+// new Promise((resolve) => {
+//   //   console.log('promise')
+//   loadProducts(() => {
+//     // console.log("finish loading")
+//     resolve("value 1");
+//   });
+// })
+//   .then((value) => {
+//     console.log(value);
+//     //   console.log("next step");
+//     return new Promise((resolve) => {
+//       loadCart(() => {
+//         resolve();
+//       });
+//     });
+//   })
+
+//   .then(() => {
+//     renderOrderSummary();
+//     renderPaymentSummary();
+//   });
+
+// -> using call back
+// loadProducts(() => {
+//   renderOrderSummary();
+//   renderPaymentSummary();
+// });
+
+// multiple callback cause nesting(code inside code)
+
+// loadProducts(() => {
+//   loadCart(() => {
+//     renderOrderSummary();
+//     renderPaymentSummary();
+//   });
+// });
+// it will cause lots of nesting lots of indentation promise flats the code
