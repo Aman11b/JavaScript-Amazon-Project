@@ -99,3 +99,5 @@ export function renderPaymentSummary() {
 // POST -> create something
 // PUT -> update something
 // DELETE -> delete something
+
+// URL parameter(search params-> used for youtube search things) is parameter?property pair
