@@ -40,13 +40,18 @@
 // const cart = [];
 
 import { cart, addToCart } from "../data/cart.js";
-import { products } from "../data/products.js";
+import { products, loadProducts } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
-let productHTML = "";
+// loadProducts(); will take time to load up
 
-products.forEach((product) => {
-  productHTML += `
+loadProducts(renderProductGrid);
+
+function renderProductGrid() {
+  let productHTML = "";
+
+  products.forEach((product) => {
+    productHTML += `
     <div class="product-container">
           <div class="product-image-container">
             <img
@@ -101,34 +106,35 @@ products.forEach((product) => {
           <button class="add-to-cart-button button-primary js-add-to-cart"
           data-product-id="${product.id}">Add to Cart</button>
         </div>`;
-});
-
-// polymorphism=use a method without knowing the class
-// ${product.extraInfoHTML()}
-
-// console.log(productHTML);
-document.querySelector(".js-products-grid").innerHTML = productHTML;
-
-function updateCartQuantity() {
-  let cartQuantity = 0;
-
-  cart.forEach((cartItem) => {
-    cartQuantity += cartItem.quantity;
   });
 
-  // console.log(cart);
-  // console.log(cartQuantity);
+  // polymorphism=use a method without knowing the class
+  // ${product.extraInfoHTML()}
 
-  document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+  // console.log(productHTML);
+  document.querySelector(".js-products-grid").innerHTML = productHTML;
+
+  function updateCartQuantity() {
+    let cartQuantity = 0;
+
+    cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
+    });
+
+    // console.log(cart);
+    // console.log(cartQuantity);
+
+    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+  }
+
+  document.querySelectorAll(".js-add-to-cart").forEach((button) => {
+    button.addEventListener("click", () => {
+      // console.log("clicked");
+      // console.log(button.dataset);
+      // console.log(button.dataset.productName);
+      const productId = button.dataset.productId;
+      addToCart(productId);
+      updateCartQuantity();
+    });
+  });
 }
-
-document.querySelectorAll(".js-add-to-cart").forEach((button) => {
-  button.addEventListener("click", () => {
-    // console.log("clicked");
-    // console.log(button.dataset);
-    // console.log(button.dataset.productName);
-    const productId = button.dataset.productId;
-    addToCart(productId);
-    updateCartQuantity();
-  });
-});
